@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pride of Nusantara</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest: #0c3028;
+      --forest-2: #124b3c;
+      --green: #23785b;
+      --mint: #d9f0df;
+      --cream: #faf8f1;
+      --gold: #e8b84b;
+      --orange: #df754f;
+      --text: #20332b;
+      --muted: #718078;
+      --white: #ffffff;
+      --border: rgba(18, 75, 60, .12);
+      --shadow: 0 20px 50px rgba(12, 48, 40, .12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--text);
+      background: var(--cream);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      transition: .3s ease;
+    }
+
+    .navbar.scrolled {
+      padding: 12px 0;
+      background: rgba(250, 248, 241, .88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 5px 25px rgba(12, 48, 40, .08);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .navbar.scrolled .brand,
+    .navbar.scrolled .nav-menu a {
+      color: var(--forest);
+    }
+
+    .brand-icon {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      color: var(--forest);
+      background: var(--gold);
+      border-radius: 13px;
+      place-items: center;
+      font-size: 1.3rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: rgba(255,255,255,.85);
+      font-size: .9rem;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      color: var(--forest) !important;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 730px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(100deg, rgba(5, 35, 28, .95) 12%, rgba(5, 35, 28, .55) 60%, rgba(5, 35, 28, .35)),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -130px;
+      bottom: -230px;
+      width: 560px;
+      height: 560px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 70px rgba(255,255,255,.025),
+        0 0 0 140px rgba(255,255,255,.025);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      min-height: 730px;
+      padding-top: 60px;
+    }
+
+    .hero-copy {
+      width: min(680px, 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      color: var(--gold);
+      border: 1px solid rgba(232,184,75,.35);
+      border-radius: 999px;
+      background: rgba(232,184,75,.1);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    h1,
+    h2 {
+      font-family: "Playfair Display", serif;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin-bottom: 22px;
+      font-size: clamp(3.4rem, 8vw, 6.8rem);
+      line-height: .98;
+      letter-spacing: -3px;
+    }
+
+    h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-copy > p {
+      max-width: 570px;
+      color: rgba(255,255,255,.77);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 21px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      color: var(--forest);
+      background: var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: #f2cb69;
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.08);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,.18);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 42px;
+      margin-top: 65px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold);
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+    }
+
+    .stat span {
+      color: rgba(255,255,255,.65);
+      font-size: .82rem;
+    }
+
+    /* Content */
+    .explore {
+      padding: 110px 0 80px;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 34px;
+    }
+
+    .section-label {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .section-top h2 {
+      color: var(--forest);
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      line-height: 1.05;
+    }
+
+    .section-description {
+      max-width: 390px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter {
+      padding: 10px 16px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .filter:hover,
+    .filter.active {
+      color: var(--white);
+      border-color: var(--forest);
+      background: var(--forest);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 245px;
+      padding: 11px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--white);
+    }
+
+    .search-box span {
+      color: var(--muted);
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      color: var(--text);
+      background: transparent;
+      font-size: .85rem;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid rgba(18,75,60,.08);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: 0 8px 25px rgba(12,48,40,.05);
+      transition: .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-image {
+      position: relative;
+      height: 235px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .card-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 55%, rgba(0,0,0,.38));
+    }
+
+    .tag {
+      position: absolute;
+      z-index: 1;
+      top: 15px;
+      left: 15px;
+      padding: 6px 11px;
+      color: var(--forest);
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 3px;
+      color: var(--forest);
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+    }
+
+    .scientific {
+      margin-bottom: 14px;
+      color: var(--green);
+      font-size: .78rem;
+      font-style: italic;
+    }
+
+    .card-content p.description {
+      display: -webkit-box;
+      overflow: hidden;
+      min-height: 78px;
+      color: var(--muted);
+      font-size: .84rem;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+    }
+
+    .fact {
+      margin: 18px 0;
+      padding: 11px 12px;
+      color: #86651e;
+      border-radius: 11px;
+      background: #fff7dd;
+      font-size: .78rem;
+    }
+
+    .fact b {
+      display: block;
+      margin-bottom: 3px;
+      color: #a87b15;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .detail {
+      width: 100%;
+      padding: 11px;
+      color: var(--forest);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .detail:hover {
+      color: var(--white);
+      background: var(--green);
+    }
+
+    /* Conservation */
+    .conservation {
+      position: relative;
+      overflow: hidden;
+      padding: 70px;
+      color: var(--white);
+      border-radius: 30px;
+      background:
+        linear-gradient(90deg, rgba(12,48,40,.97), rgba(12,48,40,.7)),
+        url("https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+    }
+
+    .conservation-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .conservation h2 {
+      margin-bottom: 16px;
+      color: var(--gold);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+    }
+
+    .conservation p {
+      color: rgba(255,255,255,.75);
+      font-size: .98rem;
+    }
+
+    .conservation .btn {
+      margin-top: 25px;
+    }
+
+    footer {
+      margin-top: 90px;
+      padding: 30px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-size: .85rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(4, 25, 20, .72);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      position: relative;
+      width: min(590px, 100%);
+      padding: 35px;
+      border-radius: 24px;
+      background: var(--cream);
+      animation: modalIn .25s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      width: 35px;
+      height: 35px;
+      border: 0;
+      border-radius: 50%;
+      background: #e7eee8;
+      color: var(--forest);
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 4px;
+      color: var(--forest);
+      font-size: 2rem;
+    }
+
+    .modal-box .scientific {
+      margin-bottom: 22px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+    }
+
+    .not-found {
+      display: none;
+      padding: 40px;
+      color: var(--muted);
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 950px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-top {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .hero-content {
+        min-height: 680px;
+      }
+
+      h1 {
+        font-size: 3.55rem;
+      }
+
+      .hero-stats {
+        gap: 25px;
+        margin-top: 45px;
+      }
+
+      .stat strong {
+        font-size: 1.6rem;
+      }
+
+      .explore {
+        padding: 75px 0 55px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .conservation {
+        padding: 38px 25px;
+        border-radius: 22px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <span class="brand-icon">🌿</span>
+        Pride of Nusantara
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#eksplorasi">Eksplorasi</a></li>
+        <li><a href="#konservasi">Konservasi</a></li>
+        <li><a href="#eksplorasi" class="nav-cta">Mulai Jelajah</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="beranda">
+    <div class="container hero-content">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span></span>
+          Kekayaan Alam Indonesia
+        </div>
+
+        <h1>
+          Bangga menjadi bagian dari <em>Nusantara.</em>
+        </h1>
+
+        <p>
+          Kenali flora dan fauna istimewa Indonesia. Temukan cerita,
+          keunikan, dan alasan mengapa kekayaan alam ini harus kita jaga
+          bersama.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#eksplorasi" class="btn btn-primary">
+            Jelajahi Sekarang →
+          </a>
+          <a href="#konservasi" class="btn btn-outline">
+            Tentang Konservasi
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>4</strong>
+            <span>Ikon Nusantara</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>Flora Terpilih</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>Fauna Terpilih</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="explore" id="eksplorasi">
+      <div class="container">
+        <div class="section-top">
+          <div>
+            <div class="section-label">Eksplorasi Nusantara</div>
+            <h2>Cerita dari alam<br>yang luar biasa.</h2>
+          </div>
+
+          <p class="section-description">
+            Setiap spesies memiliki keunikan dan peran penting dalam menjaga
+            keseimbangan ekosistem Indonesia.
+          </p>
+        </div>
+
+        <div class="toolbar">
+          <div class="filters">
+            <button class="filter active" data-filter="semua">Semua</button>
+            <button class="filter" data-filter="flora">🌺 Flora</button>
+            <button class="filter" data-filter="fauna">🐾 Fauna</button>
+          </div>
+
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Cari spesies..." />
+          </label>
+        </div>
+
+        <div class="cards" id="cards"></div>
+        <div class="not-found" id="notFound">
+          Spesies yang kamu cari belum ditemukan.
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="konservasi">
+      <div class="conservation">
+        <div class="conservation-content">
+          <div class="section-label" style="color: var(--gold);">
+            Pesan untuk kita semua
+          </div>
+
+          <h2>Kenali. Hargai. Lestarikan.</h2>
+
+          <p>
+            Indonesia bukan hanya kaya akan budaya, tetapi juga memiliki
+            keanekaragaman flora dan fauna yang luar biasa. Semua kekayaan alam
+            ini perlu dikenal, dihargai, dan dilestarikan oleh generasi sekarang
+            maupun yang akan datang.
+          </p>
+
+          <a href="#eksplorasi" class="btn btn-primary">
+            Kenali Lebih Banyak →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 Pride of Nusantara</span>
+      <span>Untuk Indonesia yang lebih lestari 🌏</span>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <button class="close" id="closeModal">×</button>
+      <h2 id="modalTitle"></h2>
+      <div class="scientific" id="modalScientific"></div>
+      <p id="modalDescription"></p>
+
+      <div class="fact" id="modalFact" style="margin-top: 22px;"></div>
+    </div>
+  </div>
+
+  <script>
+    const species = [
+      {
+        id: 1,
+        category: "flora",
+        title: "Anggrek Bulan",
+        scientific: "Phalaenopsis amabilis",
+        image: "https://images.unsplash.com/photo-1605996370592-b6f7a81e382e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description:
+          "Anggrek Bulan merupakan salah satu bunga kebanggaan Indonesia. Kelopaknya yang putih menyerupai cahaya bulan dan dikenal karena keindahan serta daya tahannya.",
+        fact:
+          "🌙 Anggrek Bulan ditetapkan sebagai salah satu bunga nasional Indonesia dengan sebutan Puspa Pesona."
+      },
+      {
+        id: 2,
+        category: "fauna",
+        title: "Komodo",
+        scientific: "Varanus komodoensis",
+        image: "https://images.unsplash.com/photo-1648726442622-5cd3abeccaa8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description:
+          "Komodo adalah reptil endemik Indonesia yang dikenal sebagai kadal terbesar yang masih hidup. Hewan ini dapat ditemukan di wilayah Nusa Tenggara.",
+        fact:
+          "🦎 Komodo dapat memiliki panjang sekitar 3 meter dan berat lebih dari 70 kg."
+      },
+      {
+        id: 3,
+        category: "flora",
+        title: "Rafflesia Arnoldii",
+        scientific: "Rafflesia arnoldii",
+        image: "https://images.unsplash.com/photo-1654180467459-cb1948a82073?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description:
+          "Rafflesia arnoldii adalah flora unik Indonesia yang terkenal karena ukuran bunganya yang sangat besar serta aromanya yang menyerupai daging membusuk.",
+        fact:
+          "🌺 Rafflesia arnoldii dapat menghasilkan bunga dengan diameter lebih dari 1 meter."
+      },
+      {
+        id: 4,
+        category: "fauna",
+        title: "Harimau Sumatera",
+        scientific: "Panthera tigris sumatrae",
+        image: "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=85",
+        description:
+          "Harimau Sumatera merupakan subspesies harimau yang hidup alami di Pulau Sumatera. Ukurannya lebih kecil sehingga mampu bergerak di hutan yang lebat.",
+        fact:
+          "🐯 Harimau Sumatera merupakan satu-satunya populasi harimau yang masih bertahan di Indonesia."
+      }
+    ];
+
+    const cards = document.getElementById("cards");
+    const searchInput = document.getElementById("searchInput");
+    const notFound = document.getElementById("notFound");
+    const modal = document.getElementById("modal");
+    const navbar = document.getElementById("navbar");
+
+    let activeFilter = "semua";
+
+    function renderCards() {
+      const keyword = searchInput.value.toLowerCase();
+
+      const filtered = species.filter(item => {
+        const categoryMatch =
+          activeFilter === "semua" || item.category === activeFilter;
+
+        const searchMatch =
+          item.title.toLowerCase().includes(keyword) ||
+          item.scientific.toLowerCase().includes(keyword);
+
+        return categoryMatch && searchMatch;
+      });
+
+      cards.innerHTML = "";
+
+      filtered.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+          <div class="card-image"
+            style="background-image: url('${item.image}')">
+            <span class="tag">
+              ${item.category === "flora" ? "🌺 Flora" : "🐾 Fauna"}
+            </span>
+          </div>
+
+          <div class="card-content">
+            <h3>${item.title}</h3>
+            <div class="scientific">${item.scientific}</div>
+
+            <p class="description">${item.description}</p>
+
+            <div class="fact">
+              <b>Fun fact</b>
+              ${item.fact}
+            </div>
+
+            <button class="detail" onclick="openDetail(${item.id})">
+              Baca selengkapnya →
+            </button>
+          </div>
+        `;
+
+        cards.appendChild(card);
+      });
+
+      notFound.style.display = filtered.length ? "none" : "block";
+    }
+
+    function openDetail(id) {
+      const item = species.find(speciesItem => speciesItem.id === id);
+
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("modalScientific").textContent = item.scientific;
+      document.getElementById("modalDescription").textContent = item.description;
+      document.getElementById("modalFact").innerHTML =
+        `<b>Fun fact</b>${item.fact}`;
+
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDetail() {
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+        renderCards();
+      });
+    });
+
+    searchInput.addEventListener("input", renderCards);
+
+    document.getElementById("closeModal")
+      .addEventListener("click", closeDetail);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeDetail();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeDetail();
+    });
+
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 40);
+    });
+
+    renderCards();
+  </script>
+</body>
+</html>
